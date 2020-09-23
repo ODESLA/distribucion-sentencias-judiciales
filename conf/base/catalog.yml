@@ -48,3 +48,9 @@ example_iris_data:
   filepath: data/01_raw/iris.csv
 
 
+d1_data:
+  type: api.APIDataSet
+  url: https://sheets.googleapis.com/v4/spreadsheets/1cH5NqQAVbh5nzBf7OWNmGcZfwYzXcZq8kLon6Oje3nQ/values/penal_df
+  params:
+    key: AIzaSyCX_Pho8CI8-QZRonJCA49k80tDCH_fTB8
+
