@@ -129,3 +129,5 @@ dmypy.json
 .pyre/
 
 Columnas Geo/CPA/cpa_csv/alturas.csv
+
+01_raw/*
