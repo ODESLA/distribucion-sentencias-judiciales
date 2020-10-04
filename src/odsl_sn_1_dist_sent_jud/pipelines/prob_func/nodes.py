@@ -35,6 +35,7 @@ import numpy as np
 from sklearn.utils import shuffle
 from scipy.interpolate import griddata
 
+
 def filtrado_conteo(data):
     """Nodo para filtar y contar la cantidad de causas por juzgado.
     Los estados posibles son: 'ASIGNADO', 'ARCHIVADO', 'EN VISTA', 'PASE', 
@@ -45,16 +46,16 @@ def filtrado_conteo(data):
     de causas activas correspondientes.
     """
     # Filtro para obtener solo causas activas. ToDo: revisar que categorias se consideran activas.
-    df = data[(data["est_descr"] == 'INICIAL') | (data["est_descr"] == 'EN VISTA')]
+    df = data[(data["est_descr"] == "INICIAL") | (data["est_descr"] == "EN VISTA")]
 
     # Serie con la cantidad de causas por juzgado
     counts = df["org_cod_pri"].value_counts()
-    
-    # Empaqueto todo en un DataFrame y lo mezclo 
-    df = shuffle(pd.DataFrame({'Juzgado': counts.index, 'Causas': counts.values}))
 
-    #Reseteo el index
-    df = df.reset_index(drop= True)
+    # Empaqueto todo en un DataFrame y lo mezclo
+    df = shuffle(pd.DataFrame({"Juzgado": counts.index, "Causas": counts.values}))
+
+    # Reseteo el index
+    df = df.reset_index(drop=True)
 
     return df
 
@@ -65,27 +66,27 @@ def calculo_probabilidad(data, alfa):
     de la velocidad de convergencia.
     Devuelve el DataFrame original mas la columna de probabilida y columna "X".
     """
-                 
+
     df = data.copy()
     causas = data["Causas"]
-    njuz = len(causas)  
-    
+    njuz = len(causas)
+
     # Probabilidad a asignar a cada juzgado
-    P = 1.0/(causas-np.min(causas)+alfa)
-    
-    # Normalizacion 
-    P = P/np.sum(P)
-    
+    P = 1.0 / (causas - np.min(causas) + alfa)
+
+    # Normalizacion
+    P = P / np.sum(P)
+
     # Genera función para transformar de función uniforme a la que queremos
-    X=np.zeros(njuz)
-    X[0]= P[0]
-    for ii in range(njuz-1):
-        X[ii+1] = P[ii] + X[ii]
-        
+    X = np.zeros(njuz)
+    X[0] = P[0]
+    for ii in range(njuz - 1):
+        X[ii + 1] = P[ii] + X[ii]
+
     # Empaquetamos todo en un DataFrame
     df["Probabilidad"] = P
     df["X"] = X
-    
+
     return df
 
 
@@ -95,10 +96,10 @@ def sorteo(data):
     Y = data.index
 
     # Valor aleatorio para la interpolacion.
-    s = np.random.uniform(0,1)
+    s = np.random.uniform(0, 1)
 
-    juz_sorteado = np.int(griddata(X, Y, s, method='linear'))
-    
+    juz_sorteado = np.int(griddata(X, Y, s, method="linear"))
+
     juz_sorteado = data.loc[juz_sorteado]["Juzgado"]
 
     print("***")

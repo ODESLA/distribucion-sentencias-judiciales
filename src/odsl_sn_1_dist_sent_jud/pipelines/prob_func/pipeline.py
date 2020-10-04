@@ -38,20 +38,12 @@ from .nodes import filtrado_conteo, calculo_probabilidad, sorteo
 def create_pipeline(**kwargs):
     return Pipeline(
         [
-            node(
-                filtrado_conteo,
-                "penal_df",
-                "penal_df_conteo"
-            ),
+            node(filtrado_conteo, "penal_df", "penal_df_conteo"),
             node(
                 calculo_probabilidad,
                 ["penal_df_conteo", "params:alfa"],
-                "penal_df_probabilidad"  
-            ),
-            node(
-                sorteo,
                 "penal_df_probabilidad",
-                None
             ),
+            node(sorteo, "penal_df_probabilidad", None),
         ]
     )
