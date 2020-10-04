@@ -25,44 +25,12 @@
 #
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
-"""Construction of the master pipeline.
 """
+This is a boilerplate test file for pipeline 'prob_func'
+generated using Kedro 0.16.2.
+Please add your pipeline tests here.
 
-from typing import Dict
-
-from kedro.pipeline import Pipeline
-
-from odsl_sn_1_dist_sent_jud.pipelines import data_engineering as de
-from odsl_sn_1_dist_sent_jud.pipelines import data_science as ds
-from odsl_sn_1_dist_sent_jud.pipelines import prob_func as pb
-
-###########################################################################
-# Here you can find an example pipeline, made of two modular pipelines.
-#
-# Delete this when you start working on your own Kedro project as
-# well as pipelines/data_science AND pipelines/data_engineering
-# -------------------------------------------------------------------------
-
-
-def create_pipelines(**kwargs) -> Dict[str, Pipeline]:
-    """Create the project's pipeline.
-
-    Args:
-        kwargs: Ignore any additional arguments added in the future.
-
-    Returns:
-        A mapping from a pipeline name to a ``Pipeline`` object.
-
-    """
-
-    data_engineering_pipeline = de.create_pipeline()
-    data_science_pipeline = ds.create_pipeline()
-    prob_func_pipeline = pb.create_pipeline()
-
-    return {
-        "pb": prob_func_pipeline,
-        "de": data_engineering_pipeline,
-        "ds": data_science_pipeline,
-        "__default__": data_engineering_pipeline + data_science_pipeline,
-    }
+Kedro recommends using `pytest` framework, more info about it can be found
+in the official documentation:
+https://docs.pytest.org/en/latest/getting-started.html
+"""
