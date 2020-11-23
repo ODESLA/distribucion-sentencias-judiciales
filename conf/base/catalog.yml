@@ -54,3 +54,9 @@ d1_data:
   params:
     key: AIzaSyCX_Pho8CI8-QZRonJCA49k80tDCH_fTB8
 
+penal_df:
+  type: pandas.CSVDataSet
+  filepath: data/01_raw/penal_df.csv
+  fs_args:
+    open_args_load:
+      mode: 'rb'
