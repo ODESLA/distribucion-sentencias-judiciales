@@ -32,9 +32,6 @@
 from typing import Dict
 
 from kedro.pipeline import Pipeline
-
-from odsl_sn_1_dist_sent_jud.pipelines import data_engineering as de
-from odsl_sn_1_dist_sent_jud.pipelines import data_science as ds
 from odsl_sn_1_dist_sent_jud.pipelines import prob_func as pb
 
 ###########################################################################
@@ -56,13 +53,9 @@ def create_pipelines(**kwargs) -> Dict[str, Pipeline]:
 
     """
 
-    data_engineering_pipeline = de.create_pipeline()
-    data_science_pipeline = ds.create_pipeline()
     prob_func_pipeline = pb.create_pipeline()
 
     return {
         "pb": prob_func_pipeline,
-        "de": data_engineering_pipeline,
-        "ds": data_science_pipeline,
-        "__default__": data_engineering_pipeline + data_science_pipeline,
+        "__default__": prob_func_pipeline,
     }

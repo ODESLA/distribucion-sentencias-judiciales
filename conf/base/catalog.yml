@@ -43,11 +43,6 @@
 # This is a data set used by the "Hello World" example pipeline provided with the project
 # template. Please feel free to remove it once you remove the example pipeline.
 
-example_iris_data:
-  type: pandas.CSVDataSet
-  filepath: data/01_raw/iris.csv
-
-
 d1_data:
   type: api.APIDataSet
   url: https://sheets.googleapis.com/v4/spreadsheets/1cH5NqQAVbh5nzBf7OWNmGcZfwYzXcZq8kLon6Oje3nQ/values/penal_df
